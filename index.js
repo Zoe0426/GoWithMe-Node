@@ -4,6 +4,7 @@ if (process.argv[2] === "production") {
     path: __dirname + "/production.env",
   });
 } else if (process.argv[2] === "mac") {
+  console.log("mac", "mac");
   require("dotenv").config({
     path: __dirname + "/mac.env",
   });
@@ -40,7 +41,6 @@ const io = socketIO(httpServer, {
       cb(null, true);
     },
   },
-
 });
 
 const rooms = new Map();
@@ -125,9 +125,7 @@ io.on("connection", (socket) => {
   socket.on("sendMessage", (message) => {
     const room = rooms.get(socket.id);
     if (room) {
-      const sender = room.users.find(
-        (user) => user.socketId === socket.id
-      )?.username;
+      const sender = room.users.find((user) => user.socketId === socket.id)?.username;
 
       if (sender) {
         room.chatHistory = [...room.chatHistory, { sender, message }];
@@ -139,13 +137,9 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     const room = rooms.get(socket.id);
     if (room) {
-      const userIndex = room.users.findIndex(
-        (user) => user.socketId === socket.id
-      );
+      const userIndex = room.users.findIndex((user) => user.socketId === socket.id);
       if (userIndex !== -1) {
-        const sender = room.users.find(
-          (user) => user.socketId === socket.id
-        )?.username;
+        const sender = room.users.find((user) => user.socketId === socket.id)?.username;
         const today = new Date();
         const hours = String(today.getHours()).padStart(2, "0");
         const minutes = String(today.getMinutes()).padStart(2, "0");
