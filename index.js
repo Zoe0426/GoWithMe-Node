@@ -8,6 +8,12 @@ if (process.argv[2] === "production") {
   require("dotenv").config({
     path: __dirname + "/mac.env",
   });
+  const [data] = await db.query("SELECT * FROM member_info LIMIT 2");
+  // data.forEach((i) => {
+  //   i.birthday = res.toDatetimeString(i.birthday);
+  //   i.created_at = res.toDatetimeString(i.created_at);
+  // });
+  console.log(data);
 } else {
   require("dotenv").config();
 }
@@ -219,11 +225,12 @@ app.get("/", (req, res) => {
 });
 app.get("/test-db", async (req, res) => {
   //連線、轉換日期格式
-  const [data] = await db.query("SELECT * FROM address_book LIMIT 2");
-  data.forEach((i) => {
-    i.birthday = res.toDatetimeString(i.birthday);
-    i.created_at = res.toDatetimeString(i.created_at);
-  });
+  const [data] = await db.query("SELECT * FROM member_info LIMIT 2");
+  // data.forEach((i) => {
+  //   i.birthday = res.toDatetimeString(i.birthday);
+  //   i.created_at = res.toDatetimeString(i.created_at);
+  // });
+  console.log(data);
   res.json(data);
 });
 //=====api路由=====
