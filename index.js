@@ -32,7 +32,7 @@ const corsOptions = {
 // });
 
 const test = async () => {
-  console.log("test");
+  console.log("runtest");
   const [data] = await db.query("SELECT * FROM member_info LIMIT 1");
   // data.forEach((i) => {
   //   i.birthday = res.toDatetimeString(i.birthday);
@@ -44,6 +44,7 @@ const test = async () => {
   //   console.log(results);
   // });
 };
+test();
 //=====.env 環境設定=====
 if (process.argv[2] === "production") {
   require("dotenv").config({
@@ -54,7 +55,6 @@ if (process.argv[2] === "production") {
   require("dotenv").config({
     path: __dirname + "/mac.env",
   });
-  test();
   console.log("path", __dirname);
 } else {
   require("dotenv").config();
