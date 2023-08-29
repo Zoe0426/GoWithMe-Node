@@ -17,6 +17,16 @@ const corsOptions = {
     cb(null, true);
   },
 };
+
+const test = async () => {
+  console.log("test");
+  const [data] = await db.query("SELECT * FROM member_info LIMIT 1");
+  // data.forEach((i) => {
+  //   i.birthday = res.toDatetimeString(i.birthday);
+  //   i.created_at = res.toDatetimeString(i.created_at);
+  // });
+  console.log(data);
+};
 //=====.env 環境設定=====
 if (process.argv[2] === "production") {
   require("dotenv").config({
@@ -27,12 +37,7 @@ if (process.argv[2] === "production") {
   require("dotenv").config({
     path: __dirname + "/mac.env",
   });
-  const [data] = db.query("SELECT * FROM member_info LIMIT 1");
-  // data.forEach((i) => {
-  //   i.birthday = res.toDatetimeString(i.birthday);
-  //   i.created_at = res.toDatetimeString(i.created_at);
-  // });
-  console.log(data);
+  test();
 } else {
   require("dotenv").config();
 }
