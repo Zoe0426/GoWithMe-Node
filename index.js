@@ -20,28 +20,29 @@ const corsOptions = {
 const mysql = require("mysql2");
 const { DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT } = process.env;
 const connection = mysql.createConnection({
-  host: DB_HOST,
+  host: `${DB_HOST}:${DB_PORT}`,
   user: DB_USER,
   password: DB_PASS,
+  database: DB_NAME,
 });
 
 connection.query(DB_NAME, function (error) {
+  console.log("check");
   if (error) throw error;
 });
 
-connection.query("SELECT * FROM member_info LIMIT 1", function (error, results, fields) {
-  if (error) throw error;
-  console.log(results);
-});
-
-const test = async () => {
+const test = () => {
   console.log("test");
-  const [data] = await connection.query("SELECT * FROM member_info LIMIT 1");
-  // data.forEach((i) => {
-  //   i.birthday = res.toDatetimeString(i.birthday);
-  //   i.created_at = res.toDatetimeString(i.created_at);
-  // });
-  console.log(data);
+  // const [data] = await connection.query("SELECT * FROM member_info LIMIT 1");
+  // // data.forEach((i) => {
+  // //   i.birthday = res.toDatetimeString(i.birthday);
+  // //   i.created_at = res.toDatetimeString(i.created_at);
+  // // });
+  // console.log(data);
+  connection.query("SELECT * FROM member_info LIMIT 1", function (error, results, fields) {
+    if (error) throw error;
+    console.log(results);
+  });
 };
 //=====.env 環境設定=====
 if (process.argv[2] === "production") {
