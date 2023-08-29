@@ -33,7 +33,7 @@ const corsOptions = {
 
 const test = async () => {
   console.log("test");
-  const [data] = await connection.query("SELECT * FROM member_info LIMIT 1");
+  const [data] = await db.query("SELECT * FROM member_info LIMIT 1");
   // data.forEach((i) => {
   //   i.birthday = res.toDatetimeString(i.birthday);
   //   i.created_at = res.toDatetimeString(i.created_at);
