@@ -1,23 +1,3 @@
-//=====.env 環境設定=====
-if (process.argv[2] === "production") {
-  require("dotenv").config({
-    path: __dirname + "/production.env",
-  });
-} else if (process.argv[2] === "mac") {
-  console.log("mac", "mac");
-  require("dotenv").config({
-    path: __dirname + "/mac.env",
-  });
-  const [data] = await db.query("SELECT * FROM member_info LIMIT 2");
-  // data.forEach((i) => {
-  //   i.birthday = res.toDatetimeString(i.birthday);
-  //   i.created_at = res.toDatetimeString(i.created_at);
-  // });
-  console.log(data);
-} else {
-  require("dotenv").config();
-}
-
 //=====載入node套件=====
 const http = require("http");
 const express = require("express");
@@ -37,6 +17,25 @@ const corsOptions = {
     cb(null, true);
   },
 };
+//=====.env 環境設定=====
+if (process.argv[2] === "production") {
+  require("dotenv").config({
+    path: __dirname + "/production.env",
+  });
+} else if (process.argv[2] === "mac") {
+  console.log("mac", "mac");
+  require("dotenv").config({
+    path: __dirname + "/mac.env",
+  });
+  const [data] = await db.query("SELECT * FROM member_info LIMIT 2");
+  // data.forEach((i) => {
+  //   i.birthday = res.toDatetimeString(i.birthday);
+  //   i.created_at = res.toDatetimeString(i.created_at);
+  // });
+  console.log(data);
+} else {
+  require("dotenv").config();
+}
 
 //socket.io設定白名單
 const socketIO = require("socket.io");
