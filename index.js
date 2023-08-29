@@ -17,10 +17,26 @@ const corsOptions = {
     cb(null, true);
   },
 };
+const mysql = require("mysql2");
+const { DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT } = process.env;
+const connection = mysql.createConnection({
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASS,
+});
+
+connection.query(DB_NAME, function (error) {
+  if (error) throw error;
+});
+
+connection.query("SELECT * FROM member_info LIMIT 1", function (error, results, fields) {
+  if (error) throw error;
+  console.log(results);
+});
 
 const test = async () => {
   console.log("test");
-  const [data] = await db.query("SELECT * FROM member_info LIMIT 1");
+  const [data] = await connection.query("SELECT * FROM member_info LIMIT 1");
   // data.forEach((i) => {
   //   i.birthday = res.toDatetimeString(i.birthday);
   //   i.created_at = res.toDatetimeString(i.created_at);
