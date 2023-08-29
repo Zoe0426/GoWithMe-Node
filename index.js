@@ -55,6 +55,7 @@ if (process.argv[2] === "production") {
     path: __dirname + "/mac.env",
   });
   test();
+  console.log("path", __dirname);
 } else {
   require("dotenv").config();
 }
