@@ -27,7 +27,7 @@ if (process.argv[2] === "production") {
   require("dotenv").config({
     path: __dirname + "/mac.env",
   });
-  const [data] = db.query("SELECT * FROM member_info LIMIT 2");
+  const [data] = db.query("SELECT * FROM member_info LIMIT 1");
   // data.forEach((i) => {
   //   i.birthday = res.toDatetimeString(i.birthday);
   //   i.created_at = res.toDatetimeString(i.created_at);
